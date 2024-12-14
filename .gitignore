@@ -3,4 +3,5 @@ bin
 include
 lib
 pyvenv.cfg
+env.py
 **/.DS_Store

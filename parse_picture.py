@@ -1,5 +1,7 @@
 import requests
 import base64
+import os
+import env
 
 def read_image (path: str):
     with open(path, 'rb') as f:
@@ -28,9 +30,10 @@ def get_image_description(image_path: str, image_title: str, extra: str):
         "max_tokens": 4096,
         "temperature": .2
     }
+    SILICON_FLOW_API_KEY = os.environ["SILICON_FLOW_API_KEY"]
     response = requests.post(
         url,
-        headers={"Authorization": "Bearer sk-gcezbcticyektqbdrimjxrinkhfsxnsmedelzmfukfvdqzqv","accept": "application/json", "content-type": "application/json",},
+        headers={"Authorization": f"Bearer {SILICON_FLOW_API_KEY}","accept": "application/json", "content-type": "application/json",},
         json=body,
         timeout=300,
     )

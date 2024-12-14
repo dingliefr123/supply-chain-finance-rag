@@ -7,6 +7,7 @@ import pprint
 from typing import List
 from langchain_text_splitters import MarkdownHeaderTextSplitter
 import requests
+import env
 
 @dataclass
 class MarkdownSplit:
@@ -155,9 +156,10 @@ def call_llm(input: str, upper_context: str, lower_context: str = ''):
         "max_tokens": 4096,
         "temperature": .2
     }
+    SILICON_FLOW_API_KEY = os.environ["SILICON_FLOW_API_KEY"]
     response = requests.post(
         "https://api.siliconflow.cn/v1/chat/completions",
-        headers={"Authorization": "Bearer sk-gcezbcticyektqbdrimjxrinkhfsxnsmedelzmfukfvdqzqv","accept": "application/json", "content-type": "application/json",},
+        headers={"Authorization": f"Bearer {SILICON_FLOW_API_KEY}","accept": "application/json", "content-type": "application/json",},
         json=body,
         timeout=300,
     )
